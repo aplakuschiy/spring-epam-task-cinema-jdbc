@@ -45,7 +45,7 @@ public class Event extends BaseModel {
 
     @Override
     public String toString() {
-        return name+" ( "+new SimpleDateFormat("HH:mm dd.MM.yyyy").format(dateEvent) + " - "+auditorium.name+" )";
+       return name+" (нач.сеанса ->"+new SimpleDateFormat("HH:mm dd.MM.yyyy").format(dateEvent) + " - "+auditorium.name+" )";
     }
     
     

@@ -12,6 +12,7 @@
         <spring.version>3.2.15.RELEASE</spring.version>
         <commons.apache.version>2.4</commons.apache.version>
         <aspectj.version>1.8.7</aspectj.version>
+        <derby.version>10.12.1.1</derby.version>
     </properties>
     
     <dependencies>
@@ -48,6 +49,11 @@
             <artifactId>aspectjweaver</artifactId>
             <version>${aspectj.version}</version>
         </dependency>
-
-    </dependencies>
+        <!-- Derby DB -->
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derby</artifactId>
+            <version>${derby.version}</version>
+        </dependency>
+     </dependencies>
 </project>
