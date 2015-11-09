@@ -13,13 +13,11 @@ import java.util.Date;
  */
 public class User extends BaseModel{
     private Date dateBirth;
-    private int state; //статус VIP и т.д.
 
     public User(int id, String name, Date dateBirth, int state) {
         super.id = id;
         super.name = name;
         this.dateBirth = dateBirth;
-        this.state = state;
         
     }
 

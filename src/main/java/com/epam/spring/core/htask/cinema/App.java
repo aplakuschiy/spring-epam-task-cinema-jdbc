@@ -12,6 +12,7 @@ import com.epam.spring.core.htask.cinema.models.Ticket;
 import com.epam.spring.core.htask.cinema.models.User;
 import com.epam.spring.core.htask.cinema.services.BookingService;
 import com.epam.spring.core.htask.cinema.services.DiscountService;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -100,7 +101,7 @@ public class App {
         }
     }
 
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) throws ParseException, IOException {
 
         ctx = new ClassPathXmlApplicationContext(new String[]{"cinema-spring.xml"});
         app = (App) ctx.getBean("app");
@@ -138,6 +139,8 @@ public class App {
             System.out.println(" = воспользовался скидками " + countersDiscount.getCount() + " раз на сумму " + countersDiscount.getSum());
         }
 
+        System.in.read();
+        
         ctx.close();
     }
 
