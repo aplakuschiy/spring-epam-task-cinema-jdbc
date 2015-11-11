@@ -29,6 +29,14 @@ public class Auditorium extends BaseModel{
     public int getCountSeats() {
         return countSeats;
     }
-     
+
+    public String getName() {
+        return name;
+    }
+
+    public int getId() {
+        return id;
+    }
+    
     
 }

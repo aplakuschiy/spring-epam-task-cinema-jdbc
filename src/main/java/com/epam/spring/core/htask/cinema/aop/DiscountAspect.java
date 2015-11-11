@@ -31,7 +31,7 @@ public class DiscountAspect {
     @Pointcut("execution(* com.epam.spring.core.htask.cinema.services.DiscountService.verifyDiscount(..))")
     private void allVerifyDiscountMethods() {
     }
-//        
+     
 
     @AfterReturning(pointcut = "allVerifyDiscountMethods()", returning = "result")
     public void count(JoinPoint jp, float result) {

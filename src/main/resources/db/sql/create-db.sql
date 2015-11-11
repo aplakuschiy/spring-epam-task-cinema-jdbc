@@ -1,31 +1,37 @@
---DROP TABLE users IF EXISTS;
+DROP TABLE tickets IF EXISTS;
+DROP TABLE events IF EXISTS;
+DROP TABLE vipseats IF EXISTS;
+DROP TABLE users IF EXISTS;
+DROP TABLE auditoriums IF EXISTS;
 
 CREATE TABLE users (
-  id         INTEGER PRIMARY KEY,
+  id         INTEGER IDENTITY PRIMARY KEY,
   name VARCHAR(30),
   bdate  DATE
 );
 
 CREATE TABLE auditoriums (
-  id         INTEGER PRIMARY KEY,
+  id         INTEGER IDENTITY PRIMARY KEY,
   name VARCHAR(30),
   countseats  INTEGER
 );
 
 CREATE TABLE events (
-  id         INTEGER PRIMARY KEY,
+  id         INTEGER IDENTITY PRIMARY KEY,
   name VARCHAR(100),
   dateevent  DATETIME,
+  baseprice FLOAT,
   idauditorium INTEGER
 );
 
 CREATE TABLE vipseats (
-  id         INTEGER PRIMARY KEY,
+  id         INTEGER IDENTITY PRIMARY KEY,
+  name VARCHAR(30),
   idauditorium INTEGER
 );
 
 CREATE TABLE tickets (
-    id INTEGER PRIMARY KEY,
+    id INTEGER IDENTITY PRIMARY KEY,
     name VARCHAR(30),
     seat INTEGER,
     price FLOAT,

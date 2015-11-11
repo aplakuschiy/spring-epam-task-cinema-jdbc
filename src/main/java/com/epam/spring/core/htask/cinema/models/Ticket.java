@@ -37,6 +37,10 @@ public class Ticket extends BaseModel{
         this.price = price;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public Event getEvent() {
         return event;
     }

@@ -21,6 +21,11 @@ public class User extends BaseModel{
         
     }
 
+    public int getId() {
+        return id;
+    }
+
+    
     public Date getDateBirth() {
         return dateBirth;
     }

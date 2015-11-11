@@ -16,12 +16,6 @@
     <import resource="aop.xml"/>
     <import resource="jdbc-config.xml"/>
 
-    <bean id="users" class="com.epam.spring.core.htask.cinema.data.dao.UserDao"/>
-    
-    <bean id="auditoriums" class="com.epam.spring.core.htask.cinema.data.dao.AuditoriumDao"/>
-    
-    <bean id="events" class="com.epam.spring.core.htask.cinema.data.dao.EventDao"/>
-    
     <bean id="discountBirthDay" class="com.epam.spring.core.htask.cinema.data.discount.DiscountBirthDay">
         <property name="percent" value="5"/>
     </bean>
@@ -41,12 +35,14 @@
 
     <bean id="bookingService" class="com.epam.spring.core.htask.cinema.services.BookingService">
         <property name="discountService" ref="discountService"/>
+        <property name="tickets" ref="tickets"/>
     </bean>
 
     <bean id="app" class="com.epam.spring.core.htask.cinema.App"> 
         <constructor-arg ref="users"/>
         <constructor-arg ref="auditoriums"/>
         <constructor-arg ref="events"/>
+        <constructor-arg ref="tickets"/>
         <property name="bookingService" ref="bookingService"/>
         <property name="discountService" ref="discountService"/>
     </bean>

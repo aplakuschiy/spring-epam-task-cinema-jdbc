@@ -5,32 +5,27 @@
  */
 package com.epam.spring.core.htask.cinema.services;
 
+import com.epam.spring.core.htask.cinema.data.dao.db.TicketDao;
 import com.epam.spring.core.htask.cinema.models.Event;
 import com.epam.spring.core.htask.cinema.models.Ticket;
 import com.epam.spring.core.htask.cinema.models.User;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ConcurrentSkipListSet;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class BookingService {
 
-    List<Ticket> tickets;
     DiscountService discountService;
+    private TicketDao tickets;
 
-    public BookingService() {
-        tickets = new CopyOnWriteArrayList<>();
-    }
-
-    public void setTickets(List<Ticket> tickets) {
-        this.tickets = tickets;
-    }
-
-    public List<Ticket> getTickets() {
+    public TicketDao getTickets() {
         return tickets;
     }
 
-    public DiscountService getDiscountService() {
+    public void setTickets(TicketDao tickets) {
+        this.tickets = tickets;
+    }
+
+     public DiscountService getDiscountService() {
         return discountService;
     }
 
@@ -38,35 +33,21 @@ public class BookingService {
         this.discountService = discountService;
     }
 
-    //Занятые места в зале 
-    public Set<Integer> getLockSeatsForEvent(Event event) {
-        if (tickets == null) {
-            return null;
-        }
-        Set<Integer> lockSeats = new ConcurrentSkipListSet<>();
-        for (Ticket ticket : tickets) {
-            Event ev = ticket.getEvent();
-            if (ev != null && ev.equals(event)) {
-                lockSeats.add(ticket.getSeat());
-            }
-        }
-        return lockSeats;
-    }
-
     public float getTicketPrice(Event event, User user, int seat) {
         float basePrice = event.getBasePrice();
-        float countDiscount = (user != null) ? discountService.verifyDiscount(user, event, tickets) : 0;
+        List<Ticket> userTickets = tickets.getTicketsForUser(user);
+        float countDiscount = (user != null) ? discountService.verifyDiscount(user, event, userTickets) : 0;
         return basePrice * (100 - countDiscount) / 100;
     }
 
     public float bookTicket(Event event, User user, Set<Integer> seats) {
         float sum = 0;
-        Set<Integer> seatsLock = getLockSeatsForEvent(event);
+        List<Integer> seatsLock = tickets.getLockSeatsForEvent(event);
             for (Integer seat : seats) {
                 if (!seatsLock.contains(seat)) {
                     float price = getTicketPrice(event, user, seat);
                     Ticket newTicket = new Ticket(event, user, seat, price);
-                    tickets.add(newTicket);
+                    tickets.create(newTicket);
                     sum += price;
                 }
             }

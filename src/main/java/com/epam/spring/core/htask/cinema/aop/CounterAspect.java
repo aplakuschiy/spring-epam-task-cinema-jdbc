@@ -10,14 +10,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.concurrent.atomic.AtomicLong;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -54,7 +49,6 @@ public class CounterAspect {
             counter = new HashMap<>();
         }
         //считаем купленные билеты
-        //String key = "куплено билетов";//jp.getSignature().getName();
             addCounter("куплено билетов");
 
         Object[] args = jp.getArgs();
@@ -71,9 +65,7 @@ public class CounterAspect {
              addCounter("индивидуальная цена");
             }        
         }
-        
-        //считаем запросы по скидкам для конкретного пользователя (только для user!=null)
-        
+      
         
     }
 

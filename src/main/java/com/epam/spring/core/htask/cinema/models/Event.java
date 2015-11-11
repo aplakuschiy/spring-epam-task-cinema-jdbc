@@ -27,6 +27,10 @@ public class Event extends BaseModel {
 
     }
 
+    public int getId() {
+        return id;
+    }
+
     public String getName() {
         return name;
     }
